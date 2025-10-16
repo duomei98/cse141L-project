@@ -1,0 +1,84 @@
+010000101	// ld r4, [5]
+010010100	// ld r5, [4]
+001001001	// movr r4, r2
+001011101	// movr r5, r3
+001111000	// movl r7, r2
+101110111	// sh r7, 7
+001110101	// movr r7, r1
+101001010	// sh r4, -6
+101000110	// sh r4, 6
+001101000	// movl r6, r2
+101101111	// sh r6, -1
+101100011	// sh r6, 3
+000100011	// cmp r6, r0
+111000010	// beq check_man_msw_zero
+110001111	// j norm_case
+000000011	// cmp r4, r0
+111000010	// beq check_man_lsw_zero
+110001000	// j denorm_case
+000010011	// cmp r5, r0
+111000010	// beq zero_case
+110000101	// j denorm_case
+001000000	// movl r4, r0
+011000111	// str r4, [7]
+011000110	// str r4, [6]
+001110001	// movr r7, r0
+001000000	// movl r4, r0
+011000111	// str r4, [7]
+011000110	// str r4, [6]
+001110001	// movr r7, r0
+100101001	// addi r6, -7
+100101001	// addi r6, -7
+100101111	// addi r6, -1
+100000100	// addi r4, 4
+100101110	// addi r6, -2
+001101001	// movr r6, r2
+001111000	// movl r7, r2
+101110111	// sh r7, 7
+000110011	// cmp r7, r0
+111000010	// beq shift_left_loop
+110001111	// j shift_right_loop
+000100011	// cmp r6, r0
+111011111	// beq end_shift
+101011111	// sh r5, -1
+001000010	// and r4, r0				# shc r4, l
+100101111	// addi r6, -1
+001001001	// movr r4, r2
+001111000	// movl r7, r2
+101110111	// sh r7, 7
+000110011	// cmp r7, r0
+111110111	// beq shift_left_loop
+001110100	// movl r7, r1				# get sign bit
+000110011	// cmp r7, r0
+111001000	// beq max_pos				# maximum positive case
+110001110	// j max_neg
+000100011	// cmp r6, r0
+111010001	// beq end_shift
+101000001	// sh r4, 1
+001011110	// and r5, r3
+100100001	// addi r6, 1
+110111011	// j shift_right_loop
+001000000	// movl r4, r0
+100000001	// addi r4, 1
+101001001	// sh r4, -7
+001001001	// movr r4, r2
+000001010	// not r4, r2
+000010010	// not r5, r0
+110001111	// j end
+001000000	// movl r4, r0
+100000001	// addi r4, 1
+101001001	// sh r4, -7
+001010000	// movl r5, r0
+110001010	// j end
+001110100	// movl r7, r1
+000110011	// cmp r7, r0
+111000111	// beq end
+001001001	// movr r4, r2
+001011101	// movr r5, r3
+000001010	// not r4, r2
+000011110	// not r5, r3
+100010001	// addi r5, 1
+001000011	// addc r4, r0
+011000111	// str r4, [7]
+011010110	// str r5, [6]
+001110001	// movr r7, r0

@@ -1,0 +1,77 @@
+010001001	// ld r4, [9]    # X_MSW
+010011000	// ld r5, [8]    # X_LSW
+010101011	// ld r6, [11]   # Y_MSW
+010111010	// ld r7, [10]   # Y_LSW
+001000000	// movl r4, r4
+101001001	// sh r4, -7     # Isolate sign bit
+001000001	// movr r4, r0   # Store X_sign in R0
+001010100	// movl r5, r5
+101011111	// sh r5, -1     # Remove hidden bit
+100010111	// addi r5, 7    # 18x7=126
+100010111	// addi r5, 7
+100010111	// addi r5, 7
+100010111	// addi r5, 7
+100010111	// addi r5, 7
+100010111	// addi r5, 7
+100010111	// addi r5, 7
+100010111	// addi r5, 7
+100010111	// addi r5, 7
+100010111	// addi r5, 7
+100010111	// addi r5, 7
+100010111	// addi r5, 7
+100010111	// addi r5, 7
+100010111	// addi r5, 7
+100010111	// addi r5, 7
+100010111	// addi r5, 7
+100010111	// addi r5, 7
+100010111	// addi r5, 7
+001101000	// movl r6, r6
+101101001	// sh r6, -7
+001100101	// movr r6, r1   # Store Y_sign in R1
+001111100	// movl r7, r7
+101111111	// sh r7, -1
+100110111	// addi r7, 7    # Same 128 addition as above
+100110111	// addi r7, 7
+100110111	// addi r7, 7
+100110111	// addi r7, 7
+100110111	// addi r7, 7
+100110111	// addi r7, 7
+100110111	// addi r7, 7
+100110111	// addi r7, 7
+100110111	// addi r7, 7
+100110111	// addi r7, 7
+100110111	// addi r7, 7
+100110111	// addi r7, 7
+100110111	// addi r7, 7
+100110111	// addi r7, 7
+100110111	// addi r7, 7
+100110111	// addi r7, 7
+100110111	// addi r7, 7
+100110111	// addi r7, 7
+000001011	// cmp r4, r6
+111000101	// beq same_exp
+000001001	// sub r4, r6    # Get exponent difference
+101011111	// sh r5, -1     # Shift right by 1
+000000011	// cmp r4, r0
+000011100	// add r5, r7    # Add mantissas
+001100000	// movl r6, r0   # Clear shift counter
+001110100	// movl r7, r5   # Copy for check
+101110111	// sh r7, 7      # Check MSB
+000110011	// cmp r7, r0
+101010001	// sh r5, 1      # Left shift
+100100001	// addi r6, 1    # Count shifts
+110111001	// j normalize
+101011111	// sh r5, -1     # Remove hidden bit
+100001111	// addi r4, 15   # Add bias in steps
+100000111	// addi r4, 7
+100000111	// addi r4, 7
+001000000	// movl r4, r4   # Clear upper bits
+000010000	// add r5, r4    # Combine exponent + mantissa
+001000001	// movr r0, r4   # Retrieve X_sign
+101000111	// sh r4, 7      # Position sign at bit 15
+000010000	// add r5, r4    # Final IEEE-754 format
+001010001	// movr r5, r4   # Copy upper 8 bits to R4
+101001000	// sh r4, -8     # Isolate upper byte
+011001101	// str r4, [13]  # Store MSW (bits 15-8)
+011011100	// str r5, [12]  # Store LSW (bits 7-0)
+001110001	// movr r7, r0   # Signal completion

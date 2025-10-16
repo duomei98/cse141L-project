@@ -1,0 +1,14 @@
+---
+:id: 336541406
+:submitters:
+- :name: Hou Wan
+  :email: h1wan@ucsd.edu
+- :name: Anna He
+  :email: a3he@ucsd.edu
+:created_at: !ruby/object:ActiveSupport::TimeWithZone
+  utc: 2025-06-10 02:20:16.621312000 Z
+  zone: !ruby/object:ActiveSupport::TimeZone
+    name: America/Los_Angeles
+  time: 2025-06-09 19:20:16.621312000 Z
+:status: processed
+:score: 95.0
